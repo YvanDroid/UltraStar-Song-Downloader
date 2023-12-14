@@ -16,7 +16,7 @@ The folder to install it to is the root folder of your UltraStar Deluxe Songs fo
 
 - This is intended to obtain videos for songs obtained from USDB [usdb.animux.de].
 
-## Limitations:
+## Limitations
 
 - YouTube downloads are only limited to your region, any unavailable videos are unavailable to the downloader as well.
 - There's currently no folder tracking but it does skip already downloading videos that already exist in the folder.
