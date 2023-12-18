@@ -43,8 +43,24 @@ def song_download(folder):
             break
 
     # Should be the #VIDEO header. Hopefully no exceptions
-    video_id = video_line.split(",")[0][7:]
+    #video_id = video_line.split(",")[0][7:]
+    needs_formatting = False # For when video exists but uses a= instead of v=
+    url_pos = video_line.find("v=")
+    if url_pos == -1:
+        url_pos = video_line.find("a=")
+        needs_formatting = True
+    
+    url_end = video_line.find(",", url_pos) # Find either the end of the line or next comma
+    if url_end == -1:
+        url_end = len(video_line)
+    video_id = video_line[url_pos:url_end]
     print(video_id)
+    if needs_formatting:
+        video_id = video_id.replace("a=","v=")
+    if video_id == "":
+        print(f"No compatible url found for {song_name}")
+        return
+    
     yt_url = "http://youtube.com/watch?" + video_id
     try:
         yt = YouTube(yt_url)
@@ -70,3 +86,5 @@ def song_download(folder):
 
 for song in directory_list:
     song_download(song)
+
+output_wait = input("Script done. Press enter to close the application")
